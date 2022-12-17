@@ -1,9 +1,9 @@
-from fastapi import FastAPI, Body
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
 import uvicorn
 from pydantic import BaseModel
-from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
 
