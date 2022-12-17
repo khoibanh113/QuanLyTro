@@ -6,7 +6,6 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-fake_db = []
 
 origins = [
     "http://127.0.0.1:8000/PostTest",
@@ -20,7 +19,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 DB_Login = { 
   "User_name": "username",
@@ -58,21 +56,6 @@ async def Submit(item: Login):
     return _return
 
   return _return_False
-
-
-@app.post("/nonPydantic")
-async def nonpydantic(item: str = Body(..., embed=True)):
-  print(item)
-  return {'user': item} 
-
-@app.put("/items/{id}")
-def update_item(id: str, item: Login):
-  json_data = jsonable_encoder(item)
-  return JSONResponse(content=json_data)
-
-def update_item(id: str, item: Login): 
-  json_data = jsonable_encoder(item) 
-  fake_db.append(json_data) 
 
 if __name__ == "__main__":
   uvicorn.run(app)
