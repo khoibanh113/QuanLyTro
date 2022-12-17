@@ -36,6 +36,7 @@ async def hello():
   return {"Hello World"}
 
 _return = {"isAccess" : "true"}
+_return_False = {"isAccess" : "false"}
 
 @app.post("/PostTest")
 async def Submit(item: Login):
@@ -46,7 +47,7 @@ async def Submit(item: Login):
   if(json_data['User_name'] == DB_Login['User_name']):
     Validate_User_name = True
   else:
-    return 'Wrong User_name'
+    return _return_False
   if(json_data['Pass_word'] == DB_Login['Pass_word']):
     Validate_Pass_word = True
   else:
@@ -56,7 +57,7 @@ async def Submit(item: Login):
   if(Validate_User_name == True and Validate_Pass_word == True):
     return _return
 
-  return {'isAccess': 'false'}
+  return _return_False
 
 
 @app.post("/nonPydantic")

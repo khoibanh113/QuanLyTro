@@ -13,6 +13,7 @@ import {
   Alert,
 } from "react-native";
 import axios from "axios";
+import default_styles from "../components/styles";
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
@@ -23,9 +24,10 @@ const LoginScreen = ({ navigation }) => {
 
     //1 false 2 true
     axios({
-      // url: "https://6398134d77359127a04679ca.mockapi.io/login/2",
-      url: "http://127.0.0.1:8000/PostTest",
-      method: "POST",
+      url: "https://6398134d77359127a04679ca.mockapi.io/login/2",
+      // url: "http://127.0.0.1:8000/PostTest",
+      // url: "http://10.0.2.2:8000/PostTest",
+      method: "get",
       data: {
         User_name: username,
         Pass_word: password,
@@ -41,6 +43,7 @@ const LoginScreen = ({ navigation }) => {
             "Tài khoản không chính xác hoặc đã bị khoá",
             [{ text: "OK" }]
           );
+          console.log("Login failed");
         }
       })
       .catch((error) => {
@@ -49,7 +52,7 @@ const LoginScreen = ({ navigation }) => {
     // navigation.navigate("ListRoom");
   };
   return (
-    <View style={styles.container}>
+    <View style={default_styles.container}>
       <KeyboardAvoidingView
         style={{ width: "100%" }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}

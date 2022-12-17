@@ -17,11 +17,15 @@
 }
 //reponse
 {
-  listTro: "json"; // dayID: 'string', nameDayTro: 'string'
+  listTro: "json"; // rowID: 'string', nameRowRoom: 'string'
 }
 
 //API get /listRoom
 {
   userID: "string";
-  dayID: "string";
+  rowID: "string";
+}
+// response
+{
+  listRoom: "json"; // roomID: 'string', nameHire: 'String'
 }
