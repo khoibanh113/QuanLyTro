@@ -3,13 +3,28 @@ from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 import uvicorn
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 fake_db = []
 
+origins = [
+    "http://127.0.0.1:8000/PostTest",
+    "http://localhost:19006"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 DB_Login = { 
-  "User_name": "usern_name - 2",
-  "Pass_word": "password - 2"
+  "User_name": "username",
+  "Pass_word": "password"
   }
 
 class Login(BaseModel):
@@ -19,6 +34,8 @@ class Login(BaseModel):
 @app.get("/")
 async def hello():
   return {"Hello World"}
+
+_return = {"isAccess" : "true"}
 
 @app.post("/PostTest")
 async def Submit(item: Login):
@@ -37,9 +54,9 @@ async def Submit(item: Login):
 
   # check Login
   if(Validate_User_name == True and Validate_Pass_word == True):
-    return "Login Successfully"
+    return _return
 
-  return 'Login Error'
+  return {'isAccess': 'false'}
 
 
 @app.post("/nonPydantic")

@@ -23,8 +23,13 @@ const LoginScreen = ({ navigation }) => {
 
     //1 false 2 true
     axios({
-      url: "https://6398134d77359127a04679ca.mockapi.io/login/2",
-      method: "GET",
+      // url: "https://6398134d77359127a04679ca.mockapi.io/login/2",
+      url: "http://127.0.0.1:8000/PostTest",
+      method: "POST",
+      data: {
+        User_name: username,
+        Pass_word: password,
+      },
     })
       .then((result) => {
         // console.log(result.data.isAccess);
