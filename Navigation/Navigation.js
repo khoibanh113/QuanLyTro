@@ -13,7 +13,10 @@ export default function Navigation() {
         <Stack.Screen
           name="ListRoom"
           component={ListRoom}
-          options={{ headerBackVisible: false }}
+          options={{
+            headerBackVisible: false,
+            title: "Danh sách các dãy phòng trọ",
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

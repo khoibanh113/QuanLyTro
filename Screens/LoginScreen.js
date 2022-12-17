@@ -21,6 +21,7 @@ const LoginScreen = ({ navigation }) => {
   const handleLogin = () => {
     // alert(`Username: ${username} Password: ${password}`);
 
+    //1 false 2 true
     axios({
       url: "https://6398134d77359127a04679ca.mockapi.io/login/2",
       method: "GET",
