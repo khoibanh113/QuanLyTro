@@ -9,27 +9,42 @@ import {
 } from "react-native";
 
 import default_styles from "../components/styles";
-export class ListRoom extends Component {
-  render() {
-    const handleClick = () => {
-      console.log("hello");
-      alert("Hello");
-    };
-    return (
-      <View style={default_styles.container}>
-        <ScrollView style={style.listItem}>
-          <TouchableOpacity style={style.borderItem} onPress={handleClick}>
-            <Image
-              source={require("../assets/home.png")}
-              style={style.iconItem}
-            />
-            <Text style={style.itemText}>Dãy trọ 1A </Text>
-          </TouchableOpacity>
-        </ScrollView>
-      </View>
-    );
-  }
-}
+const ListRoom = ({ navigation }) => {
+  //Hanle when loading page and get Dât from API
+  const text = [
+    { rowID: "1", nameRowRoom: "Dẫy số 1" },
+    { rowID: "2", nameRowRoom: "Dẫy số 2" },
+  ];
+
+  // const obj = JSON.parse(text);
+
+  return (
+    <View style={default_styles.container}>
+      <ScrollView style={style.listItem}>
+        {text.map((item, index) => {
+          return (
+            <TouchableOpacity
+              style={style.borderItem}
+              onPress={() => {
+                navigation.navigate("DetailsRoom", {
+                  userID: "1",
+                  rowID: item.rowID,
+                });
+              }}
+              key={item.rowID}
+            >
+              <Image
+                source={require("../assets/home.png")}
+                style={style.iconItem}
+              />
+              <Text style={style.itemText}>{item.nameRowRoom} </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </ScrollView>
+    </View>
+  );
+};
 
 export default ListRoom;
 
@@ -53,7 +68,6 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   iconItem: {
-    // backgroundColor: "red",
     flex: 1,
     height: "100%",
     width: "100%",
@@ -61,10 +75,19 @@ const style = StyleSheet.create({
   },
   itemText: {
     color: "red",
-    // backgroundColor: "blue",
     width: 90,
     flex: 4,
     fontSize: 40,
     lineHeight: 40,
+  },
+  plusWrapper: {
+    backgroundColor: "blue",
+    // alignItems: "flex-end",
+    // alignSelf: "flex-end",
+    flexDirection: "column-reverse",
+  },
+  iconPlus: {
+    width: 60,
+    height: 60,
   },
 });
