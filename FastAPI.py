@@ -4,8 +4,9 @@ from fastapi.encoders import jsonable_encoder
 import uvicorn
 from pydantic import BaseModel
 
-
 app = FastAPI()
+_return_True = {"isAccess" : "true"}
+_return_False = {"isAccess" : "false"}
 
 origins = [
     "http://127.0.0.1:8000/PostTest",
@@ -33,9 +34,6 @@ class Login(BaseModel):
 async def hello():
   return {"Hello World"}
 
-_return = {"isAccess" : "true"}
-_return_False = {"isAccess" : "false"}
-
 @app.post("/PostTest")
 async def Submit(item: Login):
   Validate_User_name = False
@@ -49,11 +47,11 @@ async def Submit(item: Login):
   if(json_data['Pass_word'] == DB_Login['Pass_word']):
     Validate_Pass_word = True
   else:
-    return 'Wrong Pass_word'
+    return _return_False
 
   # check Login
   if(Validate_User_name == True and Validate_Pass_word == True):
-    return _return
+    return _return_True
 
   return _return_False
 
